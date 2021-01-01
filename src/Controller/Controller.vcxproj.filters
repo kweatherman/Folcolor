@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Support">
+      <UniqueIdentifier>{1fe73dfb-8260-445d-9443-cf36bb293cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Win10set">
+      <UniqueIdentifier>{e56333fa-ba63-4ece-8d3b-67ff713bdae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Win7-8set">
+      <UniqueIdentifier>{42ae5b8d-429e-40a4-bb91-2216064a6f4b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="Utility.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="FolderColorize.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Controller.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Win10set\Cyan.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Gray.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Green.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="resources\icon1.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Lime.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Orange.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Pink.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Purple.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Red.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Teal.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Brown.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Blue.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Blue gray.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Black.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\app.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\filler1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\main_back.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Win10set\Yellow.ico">
+      <Filter>Resource Files\Win10set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Black.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Blue gray.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Blue.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Brown.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Cyan.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Gray.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Green.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Lime.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Orange.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Pink.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Purple.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Red.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Teal.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win7_8set\Yellow.ico">
+      <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Utility.cpp">
+      <Filter>Support</Filter>
+    </ClCompile>
+    <ClCompile Include="FolderColorize.cpp" />
+    <ClCompile Include="Installer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="app.manifest">
+      <Filter>Resource Files</Filter>
+    </Manifest>
+  </ItemGroup>
+</Project>
