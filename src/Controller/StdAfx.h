@@ -17,7 +17,7 @@
 
 #include "Utility.h"
 
-#define APP_VERSION "1.0"
+#define APP_VERSION "1.1"
 
 #define PROJECT_NAME "Folcolor"
 #define INSTALL_FOLDER L"Folcolor"
