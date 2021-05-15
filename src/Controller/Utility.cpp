@@ -36,16 +36,16 @@ LPSTR GetErrorString(DWORD error, __out_bcount_z(1024) LPSTR buffer)
 }
 
 
-/*
-Critical fail abort handler:
-Unlike the common design pattern of error handling that attempts to clean itself up to exit by collapsing
-backward (hopefully) on the call stack.
+/* 
+Critical fail abort application:
+Unlike the common design pattern of error handling that attempts to clean itself up to exit by collapsing 
+(hopefully) backward on the call stack. 
+Here we take intentionally take advantage of the fact that Windows OS user mode app virtualization frees 
+memory, handles, etc., on exit for us.
+Intended for critical/fatal error handling we must exist anyhow.
 
-Here we take intentionally take advantage of the fact that Windows OS UM virtualization frees
-memory, handles, etc., on exit for us automatically.
-Intended for critical/fatal error handling where we must exit anyhow.
-
-Combined with helper macros, this system encourages the covering of more, if not all, bad API result cases.
+Combined with helper macros, this idiom encourages the covering of more, if not all, of the bad API return 
+cases vs the coding exasperation and confusion of the more common pattern et al.
 */
 void CriticalErrorAbort(int line, __in LPCSTR file, __in LPCSTR reason)
 {

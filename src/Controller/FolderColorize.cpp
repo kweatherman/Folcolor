@@ -1,6 +1,4 @@
 
-// Folcolor(tm) (c) 2020 Kevin Weatherman
-// MIT license https://opensource.org/licenses/MIT
 #include "StdAfx.h"
 #include "resource.h"
 #include "FolderColorize.h"
@@ -30,7 +28,7 @@ static void RestoreFolderIcon(LPWSTR widePath)
 			FILE *fp = NULL;
 			errno_t err = _wfopen_s(&fp, initPath, L"rb");
 			if (err == 0)
-			{
+			{				
 				long size = fsize(fp);
 				if (size > 0)
 				{
@@ -41,7 +39,7 @@ static void RestoreFolderIcon(LPWSTR widePath)
 						buffer[size] = 0;
 
 						if (fread_s(buffer, size, size, 1, fp) == 1)
-						{
+						{							
 							// Quick test if the file has a GUID def typical of extended attributes
 							if (strchr(buffer, '{'))
 								keepIt = TRUE;
@@ -112,33 +110,26 @@ static void RestoreFolderIcon(LPWSTR widePath)
 
 
 // Set folder color icon for a given folder
-void SetFolderColor(int index, LPCSTR folderPath)
+void SetFolderColor(int index, LPWSTR folderPath)
 {
-	//trace("SetFolderColor: %d, \"%s\"\n", index, folderPath);
+	//trace("SetFolderColor: %d, \"%S\"\n", index, folderPath);
 
 	if (!folderPath ||(index < 0) || (index > COLOR_ICON_COUNT))
 		return;
 
 	// Shouldn't happen, but verify it's an exiting folder first anyhow
-	DWORD attr = GetFileAttributesA(folderPath);
+	DWORD attr = GetFileAttributesW(folderPath);
 	if ((attr == INVALID_FILE_ATTRIBUTES) || !(attr & FILE_ATTRIBUTE_DIRECTORY))
 		return;
-
-	// Wide version of the folder path
-	WCHAR widePath[MAX_PATH];
-	size_t dontCare;
-	errno_t en = mbstowcs_s(&dontCare, widePath, MAX_PATH, folderPath, (MAX_PATH - 1));
-	if (en != 0)
-		CRITICAL_API_ERRNO(mbstowcs_s, en);
-
+	
 	// Path to a "desktop.ini"
 	WCHAR initPath[MAX_PATH];
-	if (_snwprintf_s(initPath, MAX_PATH, (MAX_PATH-1), L"%s\\desktop.ini", widePath) < 1)
+	if (_snwprintf_s(initPath, MAX_PATH, (MAX_PATH-1), L"%s\\desktop.ini", folderPath) < 1)
 		CRITICAL("Path size limit error!");
 
 	// Folder already has system flag?
 	BOOL hasIniAlready = FALSE;
-	if (PathIsSystemFolderA(folderPath, 0))
+	if (PathIsSystemFolderW(folderPath, 0))
 	{
 		// Yes, a "desktop.ini" there?
 		DWORD attr = GetFileAttributesW(initPath);
@@ -155,7 +146,7 @@ void SetFolderColor(int index, LPCSTR folderPath)
 			WCHAR iconPath[MAX_PATH] = { 0 };
 			pfcs.pszIconFile = iconPath;
 			pfcs.cchIconFile = MAX_PATH;
-			if (SUCCEEDED(SHGetSetFolderCustomSettings(&pfcs, widePath, FCS_READ)) && iconPath[0])
+			if (SUCCEEDED(SHGetSetFolderCustomSettings(&pfcs, folderPath, FCS_READ)) && iconPath[0])
 			{
 				// Special folder icon path?
 				errno_t en = _wcslwr_s(iconPath);
@@ -180,7 +171,7 @@ void SetFolderColor(int index, LPCSTR folderPath)
 	// Restore default folder icon?
 	if (index == COLOR_ICON_COUNT)
 	{
-		RestoreFolderIcon(widePath);
+		RestoreFolderIcon(folderPath);
 		ResetWindowsIconCache();
 		return;
 	}
@@ -190,7 +181,7 @@ void SetFolderColor(int index, LPCSTR folderPath)
 	if (hasIniAlready)
 	{
 		// Need to remove the old first to get quick icon refresh on at least Windows 10
-		RestoreFolderIcon(widePath);
+		RestoreFolderIcon(folderPath);
 
 		// If desktop.ini is still here it means there are settings that needed to be saved and will have to take the delayed refresh route,
 		// else we'll let it fall through and be recreated for the fast refresh option.
@@ -205,7 +196,7 @@ void SetFolderColor(int index, LPCSTR folderPath)
 			WritePrivateProfileStringW(L".ShellClassInfo", L"IconResource", iconPath, initPath);
 
 			// Flush icon cache so the new icon setting take effect eventually
-			PathMakeSystemFolderW(widePath);
+			PathMakeSystemFolderW(folderPath);
 			ResetWindowsIconCache();
 			return;
 		}
@@ -225,7 +216,7 @@ void SetFolderColor(int index, LPCSTR folderPath)
 	_snwprintf_s(iconPath, MAX_PATH, (MAX_PATH-1), L"%sFolcolor.exe", myPathGlobal);
 	pfcs.iIconIndex = (index + iconOffsetGlobal);
 
-	HRESULT hr = SHGetSetFolderCustomSettings(&pfcs, widePath, FCS_FORCEWRITE);
+	HRESULT hr = SHGetSetFolderCustomSettings(&pfcs, folderPath, FCS_FORCEWRITE);
 	if (FAILED(hr))
 		CRITICAL_API_FAIL(SHGetSetFolderCustomSettings, HRESULT_CODE(hr));
 }

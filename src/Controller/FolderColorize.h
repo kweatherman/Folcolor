@@ -1,6 +1,4 @@
 
-// Folcolor(tm) (c) 2020 Kevin Weatherman
-// MIT license https://opensource.org/licenses/MIT
 #pragma once
 
 // Amount of color icons we support
@@ -12,5 +10,5 @@
 #define WIN7_ICON_OFFSET (2 + COLOR_ICON_COUNT)	// Windows 7 & 8 set
 
 
-void SetFolderColor(int index, LPCSTR folderPath);
+void SetFolderColor(int index, LPWSTR folderPath);
 void ResetWindowsIconCache();

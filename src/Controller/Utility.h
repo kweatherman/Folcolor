@@ -22,6 +22,7 @@ void ForceWindowFocus(HWND hWnd);
 HWND GetHwndForPid(UINT pid);
 
 BOOL DeleteRegistryPath(__in HKEY hKeyRoot, __in LPCSTR subKey);
+
 long fsize(FILE *fp);
 
 // ------------------------------------------------------------------------------------------------

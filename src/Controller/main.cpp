@@ -1,6 +1,4 @@
 
-// Folcolor(tm) (c) 2020 Kevin Weatherman
-// MIT license https://opensource.org/licenses/MIT
 #include "StdAfx.h"
 #include <versionhelpers.h>
 #include "resource.h"
@@ -382,8 +380,8 @@ static INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 		}
 		break;
 
-		case WM_CLOSE:
-		EndDialog(hWnd, 0);
+		case WM_CLOSE:		
+		EndDialog(hWnd, 0);		
 		break;
 	}
 
@@ -391,7 +389,7 @@ static INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 }
 
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, int iCmdShow)
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
 	// Should only be one instance running
 	if(FindDoppelganger())
@@ -411,24 +409,24 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine,
 	// Or has install folder?
 	DWORD attr = GetFileAttributesW(myPathGlobal);
 	isInstalled |= ((attr != INVALID_FILE_ATTRIBUTES) && (attr & FILE_ATTRIBUTE_DIRECTORY));
-
+	
 	// Icon resource set index for Win10 or Win 7/8
 	if (!IsWindows10OrGreater())
-		iconOffsetGlobal = WIN7_ICON_OFFSET;
+		iconOffsetGlobal = WIN7_ICON_OFFSET;	
 
 	// We're passed icon index argument?
 	if (isInstalled)
 	{
-		if(szCmdLine && (strlen(szCmdLine) > 0))
+		if(pCmdLine && (wcslen(pCmdLine) > 0))
 		{
 			// Get passed color index
-			LPSTR indexPtr = strstr(szCmdLine, COMMAND_ICON);
+			LPWSTR indexPtr = wcsstr(pCmdLine, L"" COMMAND_ICON);
 			if (indexPtr)
 			{
-				// Passed folder path
-				LPSTR folderPtr = strstr(szCmdLine, COMMAND_FOLDER);
+				// Passed folder path			
+				LPWSTR folderPtr = wcsstr(pCmdLine, L"" COMMAND_FOLDER);				
 				if(folderPtr)
-					SetFolderColor(atoi(indexPtr + SIZESTR(COMMAND_ICON)), folderPtr + SIZESTR(COMMAND_FOLDER));
+					SetFolderColor(_wtoi(&indexPtr[SIZESTR(COMMAND_ICON)]), &folderPtr[SIZESTR(COMMAND_FOLDER)]);
 			}
 
 			return EXIT_SUCCESS;

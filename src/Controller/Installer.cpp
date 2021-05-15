@@ -1,5 +1,4 @@
 
-// Installer support
 #include "StdAfx.h"
 #include "resource.h"
 #include "FolderColorize.h"
