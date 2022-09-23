@@ -1,4 +1,6 @@
 
+// Folcolor(tm) (c) 2020 Kevin Weatherman
+// MIT license https://opensource.org/licenses/MIT
 #include "StdAfx.h"
 #include "resource.h"
 #include "FolderColorize.h"
@@ -205,6 +207,13 @@ void Install()
 
 		CopyFileW(myPath, targetPath, FALSE);
 	}
+
+	// ------------------------------------------------------------------------
+
+	// TODO: Put UAC trick stuff here
+
+
+	// ------------------------------------------------------------------------
 
 	InstallRegistry();
 

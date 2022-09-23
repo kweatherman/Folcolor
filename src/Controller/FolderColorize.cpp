@@ -1,4 +1,6 @@
 
+// Folcolor(tm) (c) 2020 Kevin Weatherman
+// MIT license https://opensource.org/licenses/MIT
 #include "StdAfx.h"
 #include "resource.h"
 #include "FolderColorize.h"
@@ -113,11 +115,10 @@ static void RestoreFolderIcon(LPWSTR widePath)
 void SetFolderColor(int index, LPWSTR folderPath)
 {
 	//trace("SetFolderColor: %d, \"%S\"\n", index, folderPath);
-
-	if (!folderPath ||(index < 0) || (index > COLOR_ICON_COUNT))
+	if (!folderPath || (index < 0) || (index > COLOR_ICON_COUNT))
 		return;
 
-	// Shouldn't happen, but verify it's an exiting folder first anyhow
+	// Shouldn't happen, but verify it's an exiting folder first
 	DWORD attr = GetFileAttributesW(folderPath);
 	if ((attr == INVALID_FILE_ATTRIBUTES) || !(attr & FILE_ATTRIBUTE_DIRECTORY))
 		return;
@@ -134,7 +135,6 @@ void SetFolderColor(int index, LPWSTR folderPath)
 		// Yes, a "desktop.ini" there?
 		DWORD attr = GetFileAttributesW(initPath);
 		hasIniAlready = ((attr != INVALID_FILE_ATTRIBUTES) && !(attr & FILE_ATTRIBUTE_DIRECTORY));
-
 		if (hasIniAlready)
 		{
 			// Yes, has an icon entry?

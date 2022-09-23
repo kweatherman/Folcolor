@@ -1,7 +1,14 @@
 
 """
-Batch process Windows 10 and 7/8 icon file colorings
+Batch process Windows 10 and 7/8 icon files colorings
 Python 3.x
+
+https://opensource.com/article/19/3/python-image-manipulation-tools
+https://docs.python-guide.org/scenarios/imaging/
+
+Online color space converter:
+https://www.w3schools.com/colors/colors_converter.asp
+https://serennu.com/colour/hsltorgb.php
 """
 import io
 import os
@@ -32,6 +39,27 @@ With the base Win10 SL its between the 200 and 300 shade
 
 base_path = '../Controller/Resources/'
 
+# Windows 11 color set tweak table
+# TODO: This could use more TLC. The LS parts are not tweaked, just copied from the Win10 set
+win11_hue = -45.228  # Hue offset
+win11_table = [
+    # Output file name         HUE (0-360)        Sat    Level scalar
+    ["Win11set/Black.ico",     win11_hue + 50.0,  0.0,   0.35],     # grey 800  hsl(0, 0%, 26%)
+    ["Win11set/Blue gray.ico", win11_hue + 200.0, 0.195, 0.73],     # blueGrey 400  hsl(200, 15%, 54%)
+    ["Win11set/Blue.ico",      win11_hue + 207.0, 0.99,  0.92],     # blue 400  hsl(207, 89%, 68%)
+    ["Win11set/Brown.ico",     win11_hue + 16.0,  0.215, 0.64],     # brown 400  hsl(16, 18%, 47%)
+    ["Win11set/Cyan.ico",      win11_hue + 187,   0.79,  0.8],      # cyan 300  hsl(187, 71%, 59%)
+    ["Win11set/Gray.ico",      win11_hue + 50.0,  0.0,   1.1],      # grey 300  hsl(0, 0%, 88%)
+    ["Win11set/Green.ico",     win11_hue + 123.0, 0.45,  0.77],     # green 400  hsl(123, 38%, 57%)
+    ["Win11set/Lime.ico",      win11_hue + 66.0,  0.78,  0.80],     # lime 400  hsl(66, 70%, 61%)
+    ["Win11set/Orange.ico",    win11_hue + 36.0,  1.5,   0.86],     # orange 300  hsl(36, 100%, 65%)
+    ["Win11set/Pink.ico",      win11_hue + 340.0, 0.92,  0.99],     # pink 300  hsl(340, 83%, 66%)
+    ["Win11set/Purple.ico",    win11_hue + 291.0, 0.53,  0.815],    # purple 300  hsl(291, 47%, 60%)
+    ["Win11set/Red.ico",       win11_hue + 1.0,   0.92,  0.85],     # red 400  hsl(1, 83%, 63%)
+    ["Win11set/Teal.ico",      win11_hue + 174.0, 0.476, 0.69],     # teal 300  hsl(174, 42%, 51%)
+    ["Win11set/Yellow.ico",    win11_hue + 54.0,  1.22,  0.91]      # yellow 400  hsl(54, 100%, 67%)
+]
+
 # Windows 10 color set tweak table
 win10_hue = -45.228  # Hue offset
 win10_table = [
@@ -53,7 +81,7 @@ win10_table = [
 ]
 
 # Windows 7 & 8 base icon tweak table
-# TODO: Windows 7/8 icons set could use more TLC. The LS parts are not tweaked, just copied from the Win10 set above
+# TODO: This could use more TLC. The LS parts are not tweaked, just copied from the Win10 set
 win7_8_hue = -48.765
 win7_8_table = [
     ["Win7_8set/Black.ico", win7_8_hue + 50.0,      0.0,   0.35],   # grey 800  hsl(0, 0%, 26%)
@@ -179,10 +207,14 @@ def process_icon_base(in_file, nfo_table, isWin10):
     for e in nfo_table:
         apply_color(im, e[0], e[1], e[2], e[3], isWin10)
 
+# Windows 11
+print("-- Creating Windows 11 set..")
+process_icon_base("Windows11.ico", win11_table, True)
 
 # Windows 10
 print("-- Creating Windows 10 set..")
 process_icon_base("Windows10.ico", win10_table, True)
 
+# Windows 7/8
 print("-- Creating Windows 7 & 8 set..")
 process_icon_base("Windows7_8_rgba.ico", win7_8_table, False)

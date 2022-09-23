@@ -1,4 +1,6 @@
 
+// Folcolor(tm) (c) 2020 Kevin Weatherman
+// MIT license https://opensource.org/licenses/MIT
 #include "StdAfx.h"
 #include <versionhelpers.h>
 #include "resource.h"
@@ -7,11 +9,15 @@
 #define APP_URL "http://www.folcolor.com/"
 
 static BOOL isInstalled = FALSE;
-WCHAR myPathGlobal[MAX_PATH] = { 0 };
-int iconOffsetGlobal = WIN10_ICON_OFFSET;
+WCHAR myPathGlobal[MAX_PATH] = {};
+int iconOffsetGlobal = WIN7_ICON_OFFSET;
 extern void Install();
 extern int Uninstall();
 extern BOOL HasInstallRegistry();
+
+// ntdll.lib
+typedef long NTSTATUS;
+extern "C" NTSYSAPI NTSTATUS NTAPI RtlGetVersion(__out PRTL_OSVERSIONINFOEXW VersionInformation /*PRTL_OSVERSIONINFOW*/);
 
 
 // If there is another instance of us running, pull it into focus and return TRUE
@@ -220,7 +226,7 @@ static INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 		case WM_INITDIALOG:
 		{
 			// Add info to caption
-			SetWindowTextA(hWnd, PROJECT_NAME "  Version: " APP_VERSION ",  Build: " __DATE__);
+			SetWindowTextA(hWnd, PROJECT_NAME " " APP_VERSION " Built: " __DATE__);
 
 			// Set dialog icon
 			HICON hIcon = LoadIconA((HINSTANCE) GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_APP));
@@ -395,7 +401,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	if(FindDoppelganger())
 		return EXIT_FAILURE;
 
-	// Build installation folder path
+	// Our path from "%ProgramFiles(x86)%" base
 	C_ASSERT(_countof(myPathGlobal) >= MAX_PATH);
 	HRESULT hr = SHGetSpecialFolderPathW(0, myPathGlobal, CSIDL_PROGRAM_FILES, FALSE);
 	if (FAILED(hr))
@@ -410,16 +416,23 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	DWORD attr = GetFileAttributesW(myPathGlobal);
 	isInstalled |= ((attr != INVALID_FILE_ATTRIBUTES) && (attr & FILE_ATTRIBUTE_DIRECTORY));
 	
-	// Icon resource set index for Win10 or Win 7/8
-	if (!IsWindows10OrGreater())
-		iconOffsetGlobal = WIN7_ICON_OFFSET;	
-
-	// We're passed icon index argument?
+	// Icon resource set index per OS version
+	OSVERSIONINFOA nfo = { sizeof(OSVERSIONINFOA), 0,0,0};
+	RtlGetVersion((PRTL_OSVERSIONINFOEXW) &nfo);
+	if (nfo.dwMajorVersion >= 10)
+	{
+		if(nfo.dwBuildNumber >= 22000)
+			iconOffsetGlobal = WIN11_ICON_OFFSET;
+		else
+			iconOffsetGlobal = WIN10_ICON_OFFSET;
+	}
+	
+	// We're passed an icon index argument?
 	if (isInstalled)
 	{
 		if(pCmdLine && (wcslen(pCmdLine) > 0))
 		{
-			// Get passed color index
+			// Yes, get passed color index
 			LPWSTR indexPtr = wcsstr(pCmdLine, L"" COMMAND_ICON);
 			if (indexPtr)
 			{

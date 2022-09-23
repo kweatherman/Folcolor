@@ -1,5 +1,6 @@
 
-// Misc utility support
+// Folcolor(tm) (c) 2020 Kevin Weatherman
+// MIT license https://opensource.org/licenses/MIT
 #pragma once
 
 // Size of string sans terminator

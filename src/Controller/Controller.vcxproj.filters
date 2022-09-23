@@ -1,18 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Support">
+      <UniqueIdentifier>{1fe73dfb-8260-445d-9443-cf36bb293cd3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Support">
-      <UniqueIdentifier>{1fe73dfb-8260-445d-9443-cf36bb293cd3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Win10set">
       <UniqueIdentifier>{e56333fa-ba63-4ece-8d3b-67ff713bdae8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Win7-8set">
       <UniqueIdentifier>{42ae5b8d-429e-40a4-bb91-2216064a6f4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Win11set">
+      <UniqueIdentifier>{8e334c2a-b567-47ef-ad5a-8f4f61c2a4cc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +129,48 @@
     </Image>
     <Image Include="Resources\Win7_8set\Yellow.ico">
       <Filter>Resource Files\Win7-8set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Black.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Blue gray.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Blue.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Brown.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Cyan.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Gray.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Green.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Lime.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Orange.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Pink.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Purple.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Red.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Teal.ico">
+      <Filter>Resource Files\Win11set</Filter>
+    </Image>
+    <Image Include="Resources\Win11set\Yellow.ico">
+      <Filter>Resource Files\Win11set</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

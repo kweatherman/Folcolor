@@ -1,5 +1,6 @@
 
-// Misc utility support
+// Folcolor(tm) (c) 2020 Kevin Weatherman
+// MIT license https://opensource.org/licenses/MIT
 #include "StdAfx.h"
 
 
@@ -92,6 +93,42 @@ HWND GetHwndForPid(UINT pid)
 }
 
 // ------------------------------------------------------------------------------------------------
+
+
+// Run a command line process, waiting for it to complete, and returning the error code
+DWORD ShellCommand(__in LPWSTR cmdLine, BOOL invisible)
+{
+	DWORD exitCode = -1;
+
+	PROCESS_INFORMATION pi = {};
+	STARTUPINFOW si = {};
+	si.cb = sizeof(si);
+	if (invisible)
+	{
+		si.dwFlags = STARTF_USESHOWWINDOW;
+		si.wShowWindow = SW_HIDE;
+	}
+
+	// Create child process
+	// Note command line needs to RW per MSDN
+	if (!CreateProcessW(NULL, cmdLine, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
+		CRITICAL_API_FAIL(CreateProcessW, GetLastError());
+
+	// Wait until processes exits	
+	DWORD status = WaitForSingleObject(pi.hProcess, (8 * 1000));
+	if (status != WAIT_OBJECT_0)
+		CRITICAL_API_FAIL(WaitForSingleObject, (status == WAIT_FAILED) ? GetLastError() : HRESULT_FROM_WIN32(status));
+
+	// Get process return code	
+	GetExitCodeProcess(pi.hProcess, &exitCode);	
+
+	CloseHandle(pi.hProcess);
+	CloseHandle(pi.hThread);	
+
+	return exitCode;
+}
+
+
 
 // Get a 32bit file size by handle
 long fsize(FILE *fp)

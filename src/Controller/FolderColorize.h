@@ -1,4 +1,6 @@
 
+// Folcolor(tm) (c) 2020 Kevin Weatherman
+// MIT license https://opensource.org/licenses/MIT
 #pragma once
 
 // Amount of color icons we support
@@ -6,8 +8,9 @@
 #define COLOR_ICON_COUNT 14
 
 // Offsets into our embedded icon resource
-#define WIN10_ICON_OFFSET 2	// Windows 10 set
-#define WIN7_ICON_OFFSET (2 + COLOR_ICON_COUNT)	// Windows 7 & 8 set
+#define WIN10_ICON_OFFSET 2								// Windows 10 set
+#define WIN7_ICON_OFFSET (2 + COLOR_ICON_COUNT)			// Windows 7 & 8 set
+#define WIN11_ICON_OFFSET (2 + (COLOR_ICON_COUNT * 2))	// Windows 11 set
 
 
 void SetFolderColor(int index, LPWSTR folderPath);

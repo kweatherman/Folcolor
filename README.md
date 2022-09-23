@@ -19,7 +19,7 @@ Especially useful for programmers/developers, artists, power users, etc., that m
 ## Installing
 1) Download the Folcolor.exe executable.  
 2) Run Folcolor.exe and click the "Install" button.
- 
+
 ### The dialog window
 ![Folcolor Logo](readme_assets/ui_screenshot_install.png)  
 
@@ -35,7 +35,7 @@ Now installed, simply right click on a folder, select "Color Folder", and select
 * Secure design: Absolute minimal API usage, using zero network calls. No adware, no nag screens, data collection, and   doesn't use a vulnerable Explorer shell extension like others do.  
 
 ## Requirements  
-Windows 7,8, or 10 32bit or 64bit OS.
+Windows 7 to 11 32bit or 64bit OS.
 
 ## Motivation
 After trying several commercial and free implementations of similar coloring tools, they were all lacking in one way or another.  Many had security red flags, advertising pop-ups, odd color schemes, using bloated Windows explorer shell Extensions, and/or with disagreeable license terms.  
@@ -47,10 +47,10 @@ See http://www.folcolor.com for more details.
 Please report any potential bugs or other issues, suggestions, feature requests, using the github issue feautre.    
 https://github.com/kweatherman/Folcolor/issues  
 
-## Buliding
-Developed in C/C++ using [Microsoft Visual Studio 2019](https://visualstudio.microsoft.com):  
+## Building
+Developed in C/C++ using [Microsoft Visual Studio 2022](https://visualstudio.microsoft.com):  
 
-Python 3.8 using the [PyCharm IDE](https://www.jetbrains.com/pycharm ) for procedurally generating the color icon sets.   
+Python 3.10 using the [PyCharm IDE](https://www.jetbrains.com/pycharm ) for procedurally generating the color icon sets.   
 
 See http://www.folcolor.com for more development details.  
 
@@ -62,5 +62,4 @@ branch. Pull requests are welcomed.
 The code and assets in this project is licensed under MIT license.  
 Copyright (c) 2020 Kevin Weatherman  
 https://github.com/kweatherman/Folcolor/blob/main/LICENSE
-
 
